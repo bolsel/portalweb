@@ -1,0 +1,29 @@
+name: Build
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 'Create .env.local'
+        run: |
+          echo BACKEND_URL=${{ secrets.BACKEND_URL }} >> .env.local
+          echo BACKEND_TOKEN=${{ secrets.BACKEND_TOKEN }} >> .env.local
+          echo NEW_RELIC_APP_NAME=${{ secrets.NEW_RELIC_APP_NAME }} >> .env.local
+          echo NEW_RELIC_LICENSE_KEY=${{ secrets.NEW_RELIC_LICENSE_KEY }} >> .env.local
+          echo NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID }} >> .env.local
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
