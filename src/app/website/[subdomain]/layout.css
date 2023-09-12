@@ -1,0 +1,14 @@
+[data-theme='kominfo'] {
+  .jumbotron-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: radial-gradient(
+      100% 2589.12% at 0 0,
+      rgba(0, 9, 40, 0.98) 0,
+      rgba(0, 32, 39, 0.9) 100%
+    );
+  }
+}

@@ -1,0 +1,8 @@
+header {
+  @apply fixed top-0 z-50 flex h-12 w-screen items-center bg-primary transition-colors duration-250 ease-brand sm:h-16 lg:h-20
+    lg:bg-black lg:bg-opacity-10 lg:backdrop-blur-lg lg:backdrop-filter lg:hover:bg-primary;
+
+    &.has-bg {
+    @apply bg-primary;
+  }
+}

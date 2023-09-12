@@ -1,0 +1,16 @@
+
+.curved {
+    position: relative;
+    @apply bg-gray-50;
+    z-index: 10;
+    width: 120%;
+    margin-top: -44px;
+    margin-left: -10%;
+    margin-right: 10%;
+    height: 100px;
+    border-radius: 200vh 200vh 0% 0% / 20vh 20vh 0% 0%;
+    -moz-border-radius: 200vh 200vh 0% 0% / 20vh 20vh 0% 0%;
+    -webkit-border-radius: 200vh 200vh 0% 0% / 20vh 20vh 0% 0%;
+    overflow: hidden;
+  }
+  
