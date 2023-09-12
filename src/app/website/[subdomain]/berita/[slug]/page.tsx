@@ -7,10 +7,7 @@ import SitePage from '@/components/website/page';
 
 export async function generateMetadata({
   params: { slug },
-  parent,
 }): Promise<Metadata> {
-  console.log(parent);
-
   const item = await dataSiteBeritaBySlug(slug);
   if (!item) {
     notFound();

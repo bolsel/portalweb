@@ -32,7 +32,7 @@ export async function generateMetadata({
     title: titleWithMainTitle(`${item.title} - Layanan Publik`),
     description: item.description,
     openGraph: {
-      images: [`/og-image/layanan-publik/${item.slug}`, item.images[0].url],
+      images: [item.images[0].url],
     },
   };
 }

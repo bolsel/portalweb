@@ -7,9 +7,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: titleWithMainTitle('Layanan Publik'),
     description: 'Cari tahu Informasi layanan publik yang ada di Bolsel',
-    openGraph: {
-      images: ['/og-image/layanan-publik'],
-    },
   };
 }
 export default async function MainLayananPublikPage() {

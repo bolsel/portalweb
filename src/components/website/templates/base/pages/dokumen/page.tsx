@@ -1,19 +1,10 @@
-import { notFound } from 'next/navigation';
 import Menu from './_Menu';
 import Lists from './_Lists';
-import Title from './_Title';
-import { Metadata } from 'next';
-import Description from './_Description';
-import { dataSiteBySubdomain, dataSiteMenuDokumenItems } from '@/lib/data/site';
+import { dataSiteMenuDokumenItems } from '@/lib/data/site';
 import BaseIcon from '@/components/icons/base-icon';
 import { SiteContextType } from '@/components/website/provider';
 
-export default async function Page({
-  page: {
-    params: { subdomain },
-  },
-  site,
-}: SiteContextType) {
+export default async function Page({ site }: SiteContextType) {
   const menuList = dataSiteMenuDokumenItems(site);
 
   return (

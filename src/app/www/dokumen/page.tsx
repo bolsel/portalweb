@@ -10,9 +10,6 @@ export async function generateMetadata(): Promise<Metadata> {
     title: titleWithMainTitle('Arsip dan Dokumen'),
     description:
       'Akses dan unduh dokumen resmi dari Pemkab Bolaang Mongondow Selatan',
-    openGraph: {
-      images: ['/og-image/dokumen'],
-    },
   };
 }
 export default async function MainDokumenPage() {
