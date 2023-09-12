@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { TWebsiteGenMetaProps, TWebsitePageProps } from '@/types';
 import { dataSiteBySubdomain } from '@/lib/data/site';
-import Lists from './_components/lists';
 import SitePage from '@/components/website/page';
 
 export async function generateMetadata({
