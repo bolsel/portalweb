@@ -6,7 +6,7 @@ COPY package.json .
 RUN corepack enable && corepack prepare
 
 COPY pnpm-lock.yaml .
-RUN pnpm install
+RUN pnpm install --prod
 
 FROM node:18-alpine AS builder
 WORKDIR /app
