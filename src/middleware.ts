@@ -21,12 +21,12 @@ export default async function middleware(req: NextRequest) {
   if (
     path.match('/((og-image/|_next/|images|_static/|_vercel|[\\w-]+\\.\\w+).*)')
   ) {
-    // if (hostname !== DOMAIN_PORTAL) {
-    //   return NextResponse.json(
-    //     { error: 1, status: 404, message: 'Not found' },
-    //     { status: 404 }
-    //   );
-    // }
+    if (hostname !== DOMAIN_PORTAL) {
+      return NextResponse.json(
+        { error: 1, status: 404, message: 'Not found' },
+        { status: 404 }
+      );
+    }
     return NextResponse.next({
       headers: {
         'Access-Control-Allow-Origin': '*',
