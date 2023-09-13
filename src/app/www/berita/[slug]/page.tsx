@@ -10,18 +10,13 @@ import { urlToPortal } from '@/init';
 
 type Props = {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 const getItem = async (slug) => {
   return apiResourceItemPathRead('news')
     .bySlug({ paths: [slug] })
     .catch(() => null);
 };
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // read route params
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params.slug;
   const item = await getItem(slug);
   if (!item) {
