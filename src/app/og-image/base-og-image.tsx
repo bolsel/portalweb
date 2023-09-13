@@ -1,6 +1,7 @@
 /* eslint-disable */
 
-import { urlToPortalProd } from '@/init';
+import { DOMAIN_WWW, urlToPortalProd } from '@/init';
+import { TWebsiteItemBySubdomain } from '@/types';
 import { ImageResponse, NextRequest } from 'next/server';
 
 const truncate = (str: string, num: number) => {
@@ -16,14 +17,14 @@ export type BaseOgImagePropsType = {
   description: string;
   images: string[];
   req: NextRequest;
-  domain: string;
+  site?: TWebsiteItemBySubdomain;
 };
 export default async function BaseOgImage({
   title,
   description,
   images,
   req,
-  domain,
+  site,
 }: BaseOgImagePropsType) {
   const fontIntro = await fetch(
     new URL('../../styles/fonts/Intro.otf', import.meta.url)
@@ -107,10 +108,23 @@ export default async function BaseOgImage({
                   src={urlToPortalProd('/images/wabup.png')}
                 />
               </div>
+              <h2 tw="m-0 mt-3">Portal Resmi</h2>
               <h2 tw="m-0 mt-3">Pemerintah Kabupaten</h2>
               <h2 tw="m-0 font-bold">Bolaang Mongondow Selatan</h2>
             </div>
-            <div tw="flex p-2">{domain}</div>
+            <div tw="flex flex-col items-center p-2">
+              {site ? (
+                <h3
+                  tw="font-bold text-center m-0 mb-3"
+                  style={{ fontFamily: 'FontBody' }}
+                >
+                  {site.organization.name}
+                </h3>
+              ) : null}
+              <div tw="border-b border-red-200">
+                {site ? site.domain : DOMAIN_WWW}
+              </div>
+            </div>
           </div>
         </div>
       </div>

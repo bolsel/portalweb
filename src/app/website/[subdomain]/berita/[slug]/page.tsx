@@ -4,9 +4,10 @@ import { apiResourceItemPathRead } from '@/lib/server';
 import { dataSiteBeritaBySlug, dataSiteBySubdomain } from '@/lib/data/site';
 import { TWebsitePageProps } from '@/types';
 import SitePage from '@/components/website/page';
+import { urlToPortal } from '@/init';
 
 export async function generateMetadata({
-  params: { slug },
+  params: { subdomain, slug },
 }): Promise<Metadata> {
   const item = await dataSiteBeritaBySlug(slug);
   if (!item) {
@@ -19,7 +20,10 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      images: [item.image_cover.url],
+      images: [
+        urlToPortal(`/og-image/${subdomain}/berita/${item.slug}`),
+        item.image_cover.url,
+      ],
     },
     twitter: {
       card: 'summary_large_image',

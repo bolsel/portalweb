@@ -6,6 +6,7 @@ import ContentBlocks from '@/components/content-blocks';
 import BaseIcon from '@/components/icons/base-icon';
 import Header from './_header';
 import NewsShareItem from '@/components/share/item-news';
+import { urlToPortal } from '@/init';
 
 type Props = {
   params: { slug: string };
@@ -34,7 +35,7 @@ export async function generateMetadata(
       title,
       description,
       images: [
-        `https://www.bolselkab.go.id/og-image/berita/${item.slug}`,
+        urlToPortal(`/og-image/www/berita/${item.slug}`),
         item.image_cover.url,
       ],
     },

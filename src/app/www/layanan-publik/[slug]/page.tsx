@@ -7,6 +7,7 @@ import { Metadata } from 'next';
 import { apiResourceItemRead, titleWithMainTitle } from '@/lib/server';
 import BaseIcon from '@/components/icons/base-icon';
 import PageWithJumbotron from '@/components/pages/with-jumbotron';
+import { urlToPortal } from '@/init';
 
 const getItem = async (slug) => {
   return await apiResourceItemRead('public_services')
@@ -32,7 +33,10 @@ export async function generateMetadata({
     title: titleWithMainTitle(`${item.title} - Layanan Publik`),
     description: item.description,
     openGraph: {
-      images: [item.images[0].url],
+      images: [
+        urlToPortal(`/og-image/www/layanan-publik/${item.slug}`),
+        item.images[0].url,
+      ],
     },
   };
 }
