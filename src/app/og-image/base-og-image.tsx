@@ -43,9 +43,9 @@ export default async function BaseOgImage({
           backgroundColor: '#c6312a',
         }}
       >
-        <div tw="flex justify-between h-full">
+        <div tw="flex justify-start h-full">
           <div
-            tw="flex flex-col justify-between w-[60%] shadow-lg rounded-2xl m-5"
+            tw="flex flex-col justify-between w-[58%] shadow-lg rounded-2xl m-5"
             style={{
               background: 'linear-gradient(#fff,#fef2f2,#fee2e2)',
             }}
@@ -86,7 +86,7 @@ export default async function BaseOgImage({
             tw="flex flex-col justify-between w-[38%] items-center text-white"
             style={{ fontFamily: 'Intro' }}
           >
-            <div tw="flex flex-col items-center flex-1 px-4">
+            <div tw="flex flex-col items-center flex-1 px-4 text-center">
               <img
                 tw="w-[100px] rounded-md mr-4 bg-[#b91c1c] p-2 shadow-lg"
                 src={urlToPortalProd('/logo.png')}
