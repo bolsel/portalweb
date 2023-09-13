@@ -24,6 +24,11 @@ export const urlToPortal = (path?: string) => {
   if (path) url.pathname = path;
   return url.toString();
 };
+export const urlToPortalProd = (path?: string) => {
+  const url = new URL(`https://${DOMAIN_PORTAL}`);
+  if (path) url.pathname = path;
+  return url.toString();
+};
 
 export const urlToWww = (path?: string) => {
   const url = new URL(URL_WWW);
