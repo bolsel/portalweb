@@ -3,10 +3,10 @@ import Lists from './_Lists';
 import KategoriName from './_KategoriName';
 import { Metadata } from 'next';
 import PageWithJumbotron from '@/components/pages/with-jumbotron';
-import { apiResourceItemPathRead } from '@/lib/server';
+import { apiResourceItemPathRead, titleWithMainTitle } from '@/lib/server';
 
 export const metadata: Metadata = {
-  title: 'Aplikasi',
+  title: titleWithMainTitle('Aplikasi'),
   description:
     'Cari tahu aplikasi yang ada di Pemkab Bolaang Mongondow Selatan',
 };

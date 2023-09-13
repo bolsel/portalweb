@@ -2,6 +2,16 @@ import { TWebsiteGenMetaProps } from '@/types';
 import { Metadata } from 'next';
 import { dataSiteBySubdomain } from '../data/site';
 import { notFound } from 'next/navigation';
+import { headers } from 'next/headers';
+import { LOCALDEV_DOMAIN, ROOT_DOMAIN } from '@/init';
+
+export function currentReqSubdomain() {
+  const headerList = headers();
+  return headerList
+    .get('host')
+    ?.replace(`.${LOCALDEV_DOMAIN}`, '')
+    ?.replace(`.${ROOT_DOMAIN}`, '');
+}
 
 export async function genMetaSiteIndex({
   params: { subdomain },
@@ -14,4 +24,3 @@ export async function genMetaSiteIndex({
     description: site.organization.name,
   };
 }
-export async function generateMetadataBeritaSlug() {}

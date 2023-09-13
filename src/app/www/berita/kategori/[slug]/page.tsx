@@ -1,9 +1,39 @@
-import { apiResourceItem } from '@/lib/server';
+import {
+  apiResourceItem,
+  apiResourceItemRead,
+  titleWithMainTitle,
+} from '@/lib/server';
 import CategorySwiper from './_components/category-swiper';
 import PopulerSide from './_components/popular-side';
 import HeadlineCarousel from './_components/headline-carousel';
 import Lists from './_components/lists';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  params: { slug },
+}): Promise<Metadata> {
+  const category = await apiResourceItemRead('news_categories')
+    .setQuery({
+      filter: { slug: { _eq: slug } },
+    })
+    .items({
+      normalizer: [['name', 'description'], (data) => data],
+      single: true,
+    })
+    .catch(() => null);
+  if (!category && slug !== 'terbaru') notFound();
+  if (category) {
+    return {
+      title: titleWithMainTitle(`Berita ${category.name}`),
+      description: `Berita ${category.name} | ${category.description}`,
+    };
+  }
+  return {
+    title: titleWithMainTitle(`Berita Terbaru`),
+    description: titleWithMainTitle(`Cari tahu berita terbaru`),
+  };
+}
 
 export default async function Page({ params: { slug } }) {
   const headlineData = await apiResourceItem('news').paths.read.items({

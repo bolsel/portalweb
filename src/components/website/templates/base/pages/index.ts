@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 
 const pages = {
+  'not-found': dynamic(() => import('./not-found')),
   home: dynamic(() => import('./home/page')),
   berita: dynamic(() => import('./berita/page')),
   'berita/[slug]': dynamic(() => import('./berita/[slug]/page')),

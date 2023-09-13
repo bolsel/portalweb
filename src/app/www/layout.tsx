@@ -5,6 +5,14 @@ import { Provider } from './provider';
 import { apiClient } from '@/lib/api';
 import { readSingleton } from '@directus/sdk';
 import Footer from './_components/footer';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title:
+    process.env.NEXT_PUBLIC_MAIN_TITLE ??
+    'Pemerintah Kabupaten Bolaang Mongondow Selatan',
+  description: 'Portal Resmi Pemerintah Kabupaten Bolaang Mongondow Selatan',
+};
 
 export default async function Layout({
   children,

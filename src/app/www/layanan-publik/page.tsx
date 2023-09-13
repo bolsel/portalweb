@@ -6,7 +6,7 @@ import PageWithJumbotron from '@/components/pages/with-jumbotron';
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: titleWithMainTitle('Layanan Publik'),
-    description: 'Cari tahu Informasi layanan publik yang ada di Bolsel',
+    description: titleWithMainTitle('Cari tahu Informasi layanan publik'),
   };
 }
 export default async function MainLayananPublikPage() {

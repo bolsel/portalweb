@@ -1,8 +1,6 @@
-import PageWithJumbotron from '@/components/pages/with-jumbotron';
 import { urlToPortal } from '@/init';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Halaman tidak ditemukan',
@@ -10,11 +8,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <PageWithJumbotron
-      jumbotron={{
-        title: '',
-      }}
-    >
+    <div className="h-screen flex flex-col justify-center items-center space-x-4">
       <Image
         src={urlToPortal('/images/404.svg')}
         width="295"
@@ -30,9 +24,6 @@ export default function NotFound() {
           sementara waktu.
         </p>
       </div>
-      <Link href="/" tabIndex={-1}>
-        <button className="btn btn-primary">Kembali Ke Beranda</button>
-      </Link>
-    </PageWithJumbotron>
+    </div>
   );
 }

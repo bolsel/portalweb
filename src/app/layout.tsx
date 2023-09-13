@@ -6,11 +6,6 @@ import Script from 'next/script';
 import { IS_DEV, urlToPortal } from '@/init';
 import ModalProvider from '@/components/modal/provider';
 
-export const metadata: Metadata = {
-  title: 'Portal Resmi Pemkab Bolsel',
-  description: 'Portal Resmi Pemerintah Kabupaten Bolaang Mongondow Selatan',
-};
-
 export default function RootLayout({
   children,
 }: {
