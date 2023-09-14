@@ -7,7 +7,8 @@ import { Metadata } from 'next';
 import { apiResourceItemRead, titleWithMainTitle } from '@/lib/server';
 import BaseIcon from '@/components/icons/base-icon';
 import PageWithJumbotron from '@/components/pages/with-jumbotron';
-import { urlToPortal } from '@/init';
+import { urlToPortal, urlToWww } from '@/init';
+import JsonLdRender from '@/components/jsonld-render';
 
 const getItem = async (slug) => {
   return await apiResourceItemRead('public_services')
@@ -75,6 +76,25 @@ export default async function MainLayananPublikSlugPage({ params: { slug } }) {
         ],
       }}
     >
+      <JsonLdRender
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Layanan Publik',
+              item: urlToWww('/layanan-publik'),
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: item.title,
+            },
+          ],
+        }}
+      />
       <section className="w-full flex items-center gap-4">
         <LogoComponent item={item} className="" />
         <div className="flex flex-col items-start justify-center gap-1">

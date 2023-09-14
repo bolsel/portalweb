@@ -4,6 +4,8 @@ import { apiResourceItemRead } from '@/lib/server';
 import UIDocumentItemDetail from '@/ui/dokumen/item-detail';
 import PageWithJumbotron from '@/components/pages/with-jumbotron';
 import UIDocumentItemFrame from '@/ui/dokumen/item-frame';
+import JsonLdRender from '@/components/jsonld-render';
+import { urlToWww } from '@/init';
 
 type Props = {
   params: { slug: string };
@@ -60,6 +62,31 @@ export default async function MainDokumenSlugPage({ params: { slug } }) {
         ],
       }}
     >
+      <JsonLdRender
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Dokumen',
+              item: urlToWww('/dokumen'),
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: item.category.name,
+              item: `${urlToWww('/dokumen')}?kategori=${item.category.slug}`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: item.title,
+            },
+          ],
+        }}
+      />
       <div className="p-3 md:p-4 lg:py-8 lg:px-10 rounded-xl bg-white w-full xl:grid xl:grid-cols-[1fr,360px] xl:grid-rows-[auto,1fr] lg:gap-6">
         <UIDocumentItemFrame item={item} />
 

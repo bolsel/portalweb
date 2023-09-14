@@ -1,37 +1,21 @@
 import { notFound } from 'next/navigation';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import { apiResourceItemPathRead } from '@/lib/server';
 import { dataSiteBeritaBySlug, dataSiteBySubdomain } from '@/lib/data/site';
 import { TWebsitePageProps } from '@/types';
 import SitePage from '@/components/website/page';
-import { urlToPortal } from '@/init';
+import { dataMetadataNews } from '@/lib/data/metadata';
+import JsonLdRender from '@/components/jsonld-render';
+import { dataJsonLdNewsArticle } from '@/lib/data/jsonld';
 
 export async function generateMetadata({
-  params: { subdomain, slug },
+  params: { slug },
 }): Promise<Metadata> {
   const item = await dataSiteBeritaBySlug(slug);
   if (!item) {
     notFound();
   }
-  const { title, description } = item;
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: [
-        urlToPortal(`/og-image/${subdomain}/berita/${item.slug}`),
-        item.image_cover.url,
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      creator: '@kominfobolsel',
-    },
-  };
+  return dataMetadataNews(item);
 }
 export default async function Page(props: TWebsitePageProps<{ slug: string }>) {
   const {
@@ -50,15 +34,18 @@ export default async function Page(props: TWebsitePageProps<{ slug: string }>) {
     });
 
   return (
-    <SitePage
-      site={site}
-      data={{ item }}
-      page={{
-        ...props,
-        name: 'berita/[slug]',
-        title: item.title,
-        subTitle: 'Berita {{site.name}}',
-      }}
-    />
+    <>
+      <JsonLdRender data={dataJsonLdNewsArticle({ item })} />
+      <SitePage
+        site={site}
+        data={{ item }}
+        page={{
+          ...props,
+          name: 'berita/[slug]',
+          title: item.title,
+          subTitle: 'Berita {{site.name}}',
+        }}
+      />
+    </>
   );
 }

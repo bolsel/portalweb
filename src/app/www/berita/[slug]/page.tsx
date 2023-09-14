@@ -6,7 +6,10 @@ import ContentBlocks from '@/components/content-blocks';
 import BaseIcon from '@/components/icons/base-icon';
 import Header from './_header';
 import NewsShareItem from '@/components/share/item-news';
-import { urlToPortal } from '@/init';
+import { urlToPortal, urlToWww } from '@/init';
+import JsonLdRender from '@/components/jsonld-render';
+import { dataMetadataNews } from '@/lib/data/metadata';
+import { dataJsonLdNewsArticle } from '@/lib/data/jsonld';
 
 type Props = {
   params: { slug: string };
@@ -22,25 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!item) {
     notFound();
   }
-  const { title, description } = item;
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: [
-        urlToPortal(`/og-image/www/berita/${item.slug}`),
-        item.image_cover.url,
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      creator: '@kominfobolsel',
-    },
-  };
+  return dataMetadataNews(item);
 }
 export default async function BeritaSlugPage({ params: { slug } }) {
   const item = await getItem(slug);
@@ -56,6 +41,32 @@ export default async function BeritaSlugPage({ params: { slug } }) {
 
   return (
     <main>
+      <JsonLdRender data={dataJsonLdNewsArticle({ item })} />
+      <JsonLdRender
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Berita',
+              item: urlToWww('/berita'),
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: item.category.name,
+              item: urlToWww(`/berita/${item.category.slug}`),
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: item.title,
+            },
+          ],
+        }}
+      />
       <Header item={item} />
       <div className="ui-container mt-12 mb-12 mx-auto">
         <section className="h-full grid grid-cols-1 gap-8 lg:grid-cols-[60%,auto] xl:gap-[72px]">

@@ -25,6 +25,8 @@ export default createApiResource('news', {
       user_created: ['first_name', 'last_name', 'content_author_name'],
     },
     { user_updated: ['first_name', 'last_name', 'content_author_name'] },
+    'date_updated',
+    'date_created',
   ],
   baseQuery: {
     sort: ['-publish_date'],

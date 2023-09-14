@@ -1,5 +1,7 @@
 import Menu from './_menu';
 import PageWithJumbotron from '../../../components/pages/with-jumbotron';
+import { dataJsonLdOrganization } from '@/lib/data/jsonld';
+import JsonLdRender from '@/components/jsonld-render';
 
 export default function LayoutTentangBolselPage({ children, page }) {
   return (
@@ -20,6 +22,7 @@ export default function LayoutTentangBolselPage({ children, page }) {
         ],
       }}
     >
+      <JsonLdRender data={dataJsonLdOrganization} />
       <div className="w-full grid grid-cols-1 xl:grid-cols-[268px,auto] gap-6">
         <aside className="p-4 w-full border border-gray-200 rounded-xl h-full lg:h-[fit-content]">
           <Menu />

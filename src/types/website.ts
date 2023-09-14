@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { TApiResourcePathReturn } from './resource';
 
 export type TWebsiteItemBySubdomain =
-  TApiResourcePathReturn<'websites'>['read']['byDomain'];
+  TApiResourcePathReturn<'websites'>['read']['bySubdomain'];
 
 export type TWebsiteParams<P = {}> = { subdomain: string } & P;
 

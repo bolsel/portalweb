@@ -20,13 +20,14 @@ export default createApiResource('web_news', {
     'view_count',
     'shared_count',
     'tags',
-    { category: ['id', 'name', 'slug'] },
     { image_cover: ['*'] },
-    { website: ['id', 'slug', 'name', 'domain'] },
+    { website: ['id', 'name', 'subdomain'] },
     {
       user_created: ['first_name', 'last_name', 'content_author_name'],
     },
     { user_updated: ['first_name', 'last_name', 'content_author_name'] },
+    'date_updated',
+    'date_created',
   ],
   baseQuery: {
     sort: ['-publish_date'],

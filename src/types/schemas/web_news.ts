@@ -1,15 +1,11 @@
-import {
-  TDirectusFile,
-  TDirectusStatusField,
-  TDirectusUser,
-} from './_base';
+import { TDirectusFile, TDirectusStatusField, TDirectusUser } from './_base';
 import { Websites } from './websites';
 
 export interface WebNews {
   id: string;
   title: string;
   slug: string;
-  publish_date: Date;
+  publish_date: string;
   website: string | Websites;
   image_cover: string | TDirectusFile;
   status: TDirectusStatusField;
