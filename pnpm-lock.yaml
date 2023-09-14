@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@directus/sdk':
     specifier: ^11.0.3
@@ -96,6 +100,9 @@ devDependencies:
   postcss-nesting:
     specifier: ^12.0.1
     version: registry.npmjs.org/postcss-nesting@12.0.1(postcss@8.4.29)
+  schema-dts:
+    specifier: ^1.1.2
+    version: registry.npmjs.org/schema-dts@1.1.2(typescript@5.2.2)
   tailwindcss:
     specifier: 3.3.3
     version: registry.npmjs.org/tailwindcss@3.3.3
@@ -175,6 +182,7 @@ packages:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@emotion/memoize/-/memoize-0.7.4.tgz}
     name: '@emotion/memoize'
     version: 0.7.4
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -3724,6 +3732,17 @@ packages:
     dependencies:
       loose-envify: registry.npmjs.org/loose-envify@1.4.0
     dev: false
+
+  registry.npmjs.org/schema-dts@1.1.2(typescript@5.2.2):
+    resolution: {integrity: sha512-MpNwH0dZJHinVxk9bT8XUdjKTxMYrA5bLtrrGmFA6PTLwlOKnhi67XoRd6/ty+Djt6ZC0slR57qFhZDNMI6DhQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/schema-dts/-/schema-dts-1.1.2.tgz}
+    id: registry.npmjs.org/schema-dts/1.1.2
+    name: schema-dts
+    version: 1.1.2
+    peerDependencies:
+      typescript: '>=4.1.0'
+    dependencies:
+      typescript: registry.npmjs.org/typescript@5.2.2
+    dev: true
 
   registry.npmjs.org/semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/semver/-/semver-6.3.1.tgz}
