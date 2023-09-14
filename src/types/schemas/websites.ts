@@ -6,8 +6,6 @@ export interface Websites {
   status: TDirectusStatusField;
   sort: number;
   name: string;
-  slug: string;
-  domain: string;
   subdomain: string;
   domain_alias?: string;
   organization: string | Organizations;

@@ -1,11 +1,11 @@
+import { ROOT_DOMAIN } from '@/init';
 import { createApiResource } from '../base';
 
 export default createApiResource('websites', {
   baseFields: [
     'id',
-    'domain',
+    'subdomain',
     'domain_alias',
-    'slug',
     'name',
     'modules',
     { organization: ['id', 'name', 'slug'] },
@@ -16,30 +16,17 @@ export default createApiResource('websites', {
     },
   },
   baseNormalizer(data) {
-    return data;
+    return { ...data, domain: `${data.subdomain}.${ROOT_DOMAIN}` };
   },
-})
-  .addPath('read', 'byDomain', (res) => {
-    return ({ paths: [domain] }) => {
-      if (!domain) throw new Error('domain is required');
-      return res.read
-        .setQuery({
-          filter: { domain: { _eq: domain } },
-        })
-        .items({
-          single: true,
-        });
-    };
-  })
-  .addPath('read', 'bySubdomain', (res) => {
-    return ({ paths: [subdomain] }) => {
-      if (!subdomain) throw new Error('subdomain is required');
-      return res.read
-        .setQuery({
-          filter: { subdomain: { _eq: subdomain } },
-        })
-        .items({
-          single: true,
-        });
-    };
-  });
+}).addPath('read', 'bySubdomain', (res) => {
+  return ({ paths: [subdomain] }) => {
+    if (!subdomain) throw new Error('subdomain is required');
+    return res.read
+      .setQuery({
+        filter: { subdomain: { _eq: subdomain } },
+      })
+      .items({
+        single: true,
+      });
+  };
+});
