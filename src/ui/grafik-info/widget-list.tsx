@@ -15,6 +15,7 @@ import { IUICreateCustomizableDefine, UICreateCustomizable } from '../create';
 import BlurImage from '@/components/blur-image';
 import BaseIcon from '@/components/icons/base-icon';
 import { useModal } from '@/components/modal/provider';
+import { urlToWww } from '@/init';
 
 type Props = {
   items?: TApiResourcePathReturn<'grafik_info'>['read']['items'];
@@ -161,7 +162,7 @@ const UIGrafikInfoWidgetList: UIGrafikInfoWidgetListType['returnType'] = (
 
           {render('showAllButton') && (
             <div className="w-full flex items-center justify-center py-5">
-              <a href="/informasi-grafik">
+              <a href={urlToWww('/informasi-grafik')}>
                 <button
                   className="btn btn-sm btn-outline btn-primary normal-case"
                   type="button"
