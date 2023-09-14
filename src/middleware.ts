@@ -38,7 +38,8 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (hostname === DOMAIN_PORTAL) {
-    return NextResponse.rewrite(new URL(`/portal${path}`, req.url), {
+    url.pathname = `/portal${path}`;
+    return NextResponse.rewrite(url, {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -46,8 +47,10 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (hostname === ROOT_DOMAIN || hostname === DOMAIN_WWW) {
+    url.pathname = `/www${path}`;
     // rewrite ke www site
-    return NextResponse.rewrite(new URL(`/www${path}`, req.url));
+    return NextResponse.rewrite(url);
   }
-  return NextResponse.rewrite(new URL(`/website/${subdomain}${path}`, req.url));
+  url.pathname = `/website/${subdomain}${path}`;
+  return NextResponse.rewrite(url);
 }
