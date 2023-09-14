@@ -19,7 +19,10 @@ export default async function middleware(req: NextRequest) {
   const path = url.pathname;
 
   if (
-    path.match('/((og-image/|_next/|images|_static/|_vercel|[\\w-]+\\.\\w+).*)')
+    path.match(
+      '/((og-image/|_next/|images|_static/|_vercel|[\\w-]+\\.\\w+).*)'
+    ) &&
+    !path.match('sitemap.xml')
   ) {
     if (hostname !== DOMAIN_PORTAL) {
       return NextResponse.json(
