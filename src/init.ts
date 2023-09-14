@@ -36,6 +36,21 @@ export const urlToWww = (path?: string) => {
   return url.toString();
 };
 
+export const siteDomain = (subdomain: string) => {
+  return IS_DEV
+    ? `${subdomain}.${LOCALDEV_DOMAIN}`
+    : `${subdomain}.${ROOT_DOMAIN}`;
+};
+export const siteUrl = (subdomain: string) => {
+  const domain = siteDomain(subdomain);
+  return IS_DEV ? `http://${domain}` : `https://${domain}`;
+};
+export const urlToSite = (subdomain: string, path?: string) => {
+  const url = new URL(siteUrl(subdomain));
+  if (path) url.pathname = path;
+  return url.toString();
+};
+
 export const urlToApiResource = (path?: string) => {
   const res = '/api/resources';
   return urlToPortal(`${path ? mergePaths(res, path) : res}`);
