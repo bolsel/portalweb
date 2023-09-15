@@ -5,14 +5,17 @@ import clsx from 'clsx';
 import Script from 'next/script';
 import { IS_DEV, urlToPortal } from '@/init';
 import ModalProvider from '@/components/modal/provider';
+import { currentReqSubdomain } from '@/lib/server';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const subdomain = currentReqSubdomain();
+
   return (
-    <html lang="id">
+    <html lang="id" data-theme={subdomain}>
       <head>
         <link rel="icon" href={urlToPortal('/favicon.ico')} sizes="any" />
       </head>

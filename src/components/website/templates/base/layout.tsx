@@ -9,7 +9,7 @@ export default async function Layout({
   site,
 }: { children: ReactNode } & SiteContextType) {
   return (
-    <div data-theme={site.subdomain}>
+    <>
       <Header />
       <main>
         <Jumbotron />
@@ -22,6 +22,6 @@ export default async function Layout({
         </section>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
