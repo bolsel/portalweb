@@ -12,6 +12,7 @@ function SelectPage({ page, setPage, totalPage }) {
       className=" drop-shadow-xl relative  min-w-[50px]"
     >
       <motion.button
+        disabled={totalPage === 0}
         whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}
         className="join-item relative w-full flex items-center justify-center px-3 h-8 text-sm font-medium btn btn-outline btn-sm"
@@ -110,7 +111,7 @@ const UIPagination: UIPaginationType['returnType'] = (props) => {
                 setPage={setPage}
               />
               <button
-                disabled={page === total_pages}
+                disabled={page === total_pages || total_pages === 0}
                 onClick={() => setPage(page + 1)}
                 className="btn font-medium btn-outline btn-sm join-item"
               >
