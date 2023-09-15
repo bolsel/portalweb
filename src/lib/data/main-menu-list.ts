@@ -41,7 +41,13 @@ export default async function dataMainMenuList() {
           title: 'Aplikasi',
           link: `/aplikasi`,
           description: 'Informasi tentang daftar Aplikasi yang ada di Bolsel',
-          icon: 'base:apps',
+          icon: 'apps',
+        },
+        {
+          title: 'Informasi Grafik',
+          link: `/informasi-grafik`,
+          description: 'Lihat Informasi grafik resmi dari Pemkab Bolsel',
+          icon: 'image',
         },
         {
           title: 'Jaringan Dokumentasi dan Informasi Hukum',
