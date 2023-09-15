@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Mousewheel, Autoplay } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { useRef } from 'react';
 import Image from 'next/image';
 import { RequireOnlyOne, TApiResourcePathReturn } from '@/types';
@@ -40,7 +40,7 @@ const UIBannerInfoWidgetList: UIBannerInfoWidgetListType['returnType'] = (
         >
           <Swiper
             ref={swiperRef}
-            modules={[Pagination, Navigation, Mousewheel, Autoplay]}
+            modules={[Pagination, Navigation, Autoplay]}
             slidesPerView={1}
             spaceBetween={32}
             speed={750}
@@ -59,8 +59,6 @@ const UIBannerInfoWidgetList: UIBannerInfoWidgetListType['returnType'] = (
                 slidesPerView: items?.length && items.length === 1 ? 1 : 1.2,
               },
             }}
-            passiveListeners={true}
-            mousewheel={true}
             className="default-swiper"
             {...swiper}
           >
