@@ -59,7 +59,7 @@ export default function MenuItems() {
                           />
                         </div>
                         <div className="w-full ml-4 group-hover:border-b-primary-900 rounded-lg group-hover:bg-opacity-40">
-                          <h2 className="font-menu text-lg font-bold text-gray-50 mb-1">
+                          <h2 className="font-menu text-lg font-bold text-gray-50 mb-1 line-clamp-1">
                             {m.title}
                           </h2>
                           <div className="text-sm text-gray-50 opacity-80 line-clamp-1">
