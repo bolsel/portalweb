@@ -2,28 +2,22 @@
 
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { kategoryText } from './lib';
-import UIListItems, { useUIListItemsViewState } from '@/ui/list/items';
 import { useModal } from '@/components/modal/provider';
 import { TApiResourcePathReturn } from '@/types';
 import UIDocumentItemDetail from '@/ui/dokumen/item-detail';
 import BaseIcon from '@/components/icons/base-icon';
-import SwrResource from '@/components/swr-resource';
 import UIDocumentListItem from '@/ui/dokumen/list-item';
-import UIPagination from '@/ui/pagination';
+import SearchInput from '@/components/input/search-input';
+import UIListSwrResource from '@/ui/list/swr-resource';
 
 export default function Lists({ organizationId }) {
   const searchParams = useSearchParams();
-  const kategori = searchParams.get('kategori');
-  const [view, setView] = useUIListItemsViewState('list');
-  const [limit, setLimit] = useState(6);
-  const [page, setPage] = useState(1);
+  const kategori = searchParams.get('kategori') ?? '';
+  const search = searchParams.get('q') ?? undefined;
   const modal = useModal();
-  useEffect(() => {
-    setPage(1);
-  }, [kategori]);
+  const router = useRouter();
 
   const showModal = (
     item: TApiResourcePathReturn<'organization_documents'>['read']['items'][0]
@@ -45,96 +39,75 @@ hover:text-primary-700 hover:bg-primary-100"
             </h1>
           </section>
         ),
-      footer:
-        () =>
-        ({ closeModal }) =>
-          (
-            <div className="bg-gray-50 flex gap-4 w-full items-end justify-end py-4 z-[100] mt-auto md:mt-0 px-6">
-              <Link
-                className="btn btn-primary btn-sm text-white gap-2"
-                href={item.file.url}
-                target="_blank"
-                download
-              >
-                <BaseIcon icon="download" fontSize="18px" /> Unduh
-              </Link>
+      footer: () => () =>
+        (
+          <div className="bg-gray-50 flex gap-4 w-full items-end justify-end py-4 z-[100] mt-auto md:mt-0 px-6">
+            <Link
+              className="btn btn-primary btn-sm text-white gap-2"
+              href={item.file.url}
+              target="_blank"
+              download
+            >
+              <BaseIcon icon="download" fontSize="18px" /> Unduh
+            </Link>
 
-              <Link
-                className="btn btn-primary btn-sm text-white gap-2"
-                href={`/dokumen/${item.slug}`}
-              >
-                <BaseIcon icon="eye" fontSize="18px" /> Lihat
-              </Link>
-            </div>
-          ),
+            <Link
+              className="btn btn-primary btn-sm text-white gap-2"
+              href={`/dokumen/${item.slug}`}
+            >
+              <BaseIcon icon="eye" fontSize="18px" /> Lihat
+            </Link>
+          </div>
+        ),
     });
   };
   return (
     <>
-      <SwrResource
+      <div className="mb-2">
+        <SearchInput
+          placeholder="Cari dokumen"
+          currentValue={search}
+          onClear={() =>
+            router.push(`/dokumen${kategori ? `?kategori=${kategori}` : ''}`)
+          }
+          onSubmit={(value) =>
+            kategori
+              ? router.push(`/dokumen?kategori=${kategori}&q=${value}`)
+              : router.push(`/dokumen?q=${value}`)
+          }
+        />
+      </div>
+
+      <UIListSwrResource
         collection="organization_documents"
-        path="itemsMeta"
+        view="list"
         query={{
-          page,
-          limit,
+          search,
           filter: {
             organization: { id: { _eq: organizationId } },
             ...(kategori ? { category: { _eq: kategori } } : {}),
           },
         }}
-        emptyComponent={() => <div>Belum ada data.</div>}
-        loadingComponent={() => (
-          <UIListItems
+        loadingComponent={({ view, item }) => (
+          <UIDocumentListItem view={view} item={item} skeleton />
+        )}
+        itemComponent={({ view, item }) => (
+          <UIDocumentListItem
             view={view}
-            setView={setView}
-            items={limit}
-            Component={({ view }) => (
-              <UIDocumentListItem skeleton item={{}} view={view} />
-            )}
+            item={item}
+            customizes={{
+              fields: ({ defaults }) => ({
+                ...defaults.fields,
+                category_name: kategoryText(item.category),
+              }),
+              hideCategory: () => kategori !== '',
+              itemAction: () => (item) => {
+                showModal(item);
+              },
+            }}
           />
         )}
-      >
-        {({ data }) =>
-          data ? (
-            <>
-              <UIListItems
-                view={view}
-                setView={setView}
-                items={data!.data}
-                Component={({ item: data, view }) => (
-                  <UIDocumentListItem
-                    item={data}
-                    view={view}
-                    customizes={{
-                      hideCategory: () => kategori !== null,
-                      fields: ({ defaults }) => ({
-                        ...defaults.fields,
-                        category_name: kategoryText(data.category),
-                      }),
-                      itemAction: () => (item) => {
-                        showModal(item);
-                      },
-                    }}
-                  />
-                )}
-              />
-              <div className="mt-10">
-                {data?.meta && (
-                  <UIPagination
-                    total={data.meta.filter_count}
-                    limit={limit}
-                    page={page}
-                    setLimit={setLimit}
-                    setPage={setPage}
-                  />
-                )}
-              </div>
-            </>
-          ) : (
-            <div>Belum ada data.</div>
-          )
-        }
-      </SwrResource>
+      />
     </>
   );
 }
