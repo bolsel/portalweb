@@ -16,9 +16,11 @@ import BlurImage from '@/components/blur-image';
 import BaseIcon from '@/components/icons/base-icon';
 import { useModal } from '@/components/modal/provider';
 import { urlToWww } from '@/init';
+import Link from 'next/link';
 
+type _Item = TApiResourcePathReturn<'grafik_info'>['read']['items'][0];
 type Props = {
-  items?: TApiResourcePathReturn<'grafik_info'>['read']['items'];
+  items?: _Item[];
   skeleton?: true;
   slideContainer?: ComponentPropsWithoutRef<'div'>;
 };
@@ -39,6 +41,45 @@ const UIGrafikInfoWidgetList: UIGrafikInfoWidgetListType['returnType'] = (
     Component({ swiper, slideContainer, items, render, skeleton }) {
       const swiperRef = useRef<SwiperRef>(null);
       const modal = useModal();
+      const showModal = (item: _Item) => {
+        modal?.show(
+          <div className="w-full h-full">
+            <BlurImage
+              src={item.image.url}
+              alt={item.title}
+              title={item.title}
+              width={400}
+              height={600}
+              data-src={item.image.url}
+              className="object-cover w-full h-full rounded-lg"
+            />
+          </div>,
+          {
+            showCloseButton: () => false,
+            footer:
+              () =>
+              ({ closeModal }) =>
+                (
+                  <div className="bg-base-200 flex gap-4 w-full items-end justify-end py-4 z-[100] mt-auto md:mt-0 px-6">
+                    <Link
+                      className="btn btn-primary btn-sm text-white gap-2"
+                      href={item.image.url}
+                      target="_blank"
+                      download
+                    >
+                      <BaseIcon icon="download" fontSize="18px" /> Ukuran Penuh
+                    </Link>
+                    <button
+                      className="btn btn-outline btn-primary btn-sm text-white gap-2"
+                      onClick={closeModal}
+                    >
+                      Tutup
+                    </button>
+                  </div>
+                ),
+          }
+        );
+      };
       swiper = {
         ...swiper,
         className: clsx(
@@ -46,6 +87,7 @@ const UIGrafikInfoWidgetList: UIGrafikInfoWidgetListType['returnType'] = (
           swiper?.className ?? ''
         ),
       };
+
       return (
         <div
           className="w-full h-full"
@@ -112,21 +154,7 @@ const UIGrafikInfoWidgetList: UIGrafikInfoWidgetListType['returnType'] = (
                         height={600}
                         data-src={d.image.url}
                         className="object-cover w-full h-full rounded-lg"
-                        onClick={() => {
-                          modal?.show(
-                            <div className="w-full h-full">
-                              <BlurImage
-                                src={d.image.url}
-                                alt={d.title}
-                                title={d.title}
-                                width={400}
-                                height={600}
-                                data-src={d.image.url}
-                                className="object-cover w-full h-full rounded-lg"
-                              />
-                            </div>
-                          );
-                        }}
+                        onClick={() => showModal(d)}
                       />
                     );
                   };
