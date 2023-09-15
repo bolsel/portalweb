@@ -26,6 +26,7 @@ export type UIListItemsType<
     listIconName: BaseIconNamesType;
     gridIconName: BaseIconNamesType;
     noViewSwitch: boolean;
+    emptyComponent: ReactNode;
   }
 >;
 
@@ -40,6 +41,7 @@ export default function UIListItems<I extends Record<string, any>>(
       gridClass: () => 'grid grid-cols-1 lg:grid-cols-2 gap-4',
       listIconName: () => 'view-list',
       gridIconName: () => 'view-grid',
+      emptyComponent: () => <div>Belum ada data</div>,
       switchView: ({ view, setView, render }) => {
         if (render('noViewSwitch')) return null;
         return (
@@ -81,7 +83,9 @@ export default function UIListItems<I extends Record<string, any>>(
     },
     Component: ({ Render, Component, items, render, view }) => {
       const _items = typeof items === 'number' ? [...Array(items)] : items;
-
+      if (!_items.length) {
+        return render('emptyComponent');
+      }
       return (
         <>
           {render('switchView')}

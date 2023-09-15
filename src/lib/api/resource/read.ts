@@ -6,7 +6,7 @@ export interface ApiResRead<
   Collection extends CollectionKeys,
   BaseFields extends TQuery<Collection>['fields'],
   BaseQuery extends TQuery<Collection>,
-  BaseNormalizer extends IBaseNormalizerFn<Collection, BaseFields>,
+  BaseNormalizer extends IBaseNormalizerFn<Collection, BaseFields>
 > {
   clientOptions(o: ApiClientOptions): this;
   setQuery: (query: Omit<TQuery<Collection>, 'fields'>) => this;
@@ -18,7 +18,7 @@ export interface ApiResRead<
     ReturnNormalized = ReturnType<
       Fields extends any[] ? Normalizer : BaseNormalizer
     >,
-    Data = Single extends true ? ReturnNormalized : ReturnNormalized[],
+    Data = Single extends true ? ReturnNormalized : ReturnNormalized[]
   >(p: {
     normalizer?: [Fields, Normalizer];
     meta?: Meta;
@@ -42,7 +42,7 @@ export function apiResRead<
   Collection extends CollectionKeys,
   BaseFields extends TQuery<Collection>['fields'],
   BaseQuery extends TQuery<Collection>,
-  BaseNormalizer extends IBaseNormalizerFn<Collection, BaseFields>,
+  BaseNormalizer extends IBaseNormalizerFn<Collection, BaseFields>
 >({
   collection,
   baseFields,
@@ -54,7 +54,7 @@ export function apiResRead<
   baseQuery: BaseQuery;
   baseNormalizer: BaseNormalizer;
 }): ApiResRead<Collection, BaseFields, BaseQuery, BaseNormalizer> {
-  let { limit, page, filter, sort } = { ...baseQuery };
+  let { limit, page, filter, sort, search } = { ...baseQuery };
   let clientOptions: ApiClientOptions = {};
   return {
     clientOptions(o) {
@@ -70,6 +70,7 @@ export function apiResRead<
         if (_query.filter) filter = _query.filter;
       }
       if (_query.sort) sort = _query.sort;
+      if (_query.search) search = _query.search;
       return this;
     },
     // @ts-ignore
@@ -82,6 +83,7 @@ export function apiResRead<
       if (limit) newQuery.limit = limit;
       if (page) newQuery.page = page;
       if (sort) newQuery.sort = sort;
+      if (search) newQuery.search = search;
       const query = {
         ...{ limit: 10, page: 1 },
         ...baseQuery,
@@ -91,7 +93,7 @@ export function apiResRead<
       const data = await client.request(readItems(collection, query));
       let dataNormalized = data.map(
         // @ts-ignore
-        normalizer ? normalizer[1] : baseNormalizer,
+        normalizer ? normalizer[1] : baseNormalizer
       );
       if (single) {
         if (!dataNormalized[0]) {
@@ -101,14 +103,14 @@ export function apiResRead<
       }
       if (meta === true) {
         const _countAll = await client.request(
-          aggregate(collection, { aggregate: { count: '*' } }),
+          aggregate(collection, { aggregate: { count: '*' } })
         );
 
         const _countFilter = await client.request(
           aggregate(collection, {
             aggregate: { count: '*' },
-            query: { filter },
-          }),
+            query: { filter, search },
+          })
         );
         const countAll =
           _countAll.length && _countAll[0] && _countAll[0].count

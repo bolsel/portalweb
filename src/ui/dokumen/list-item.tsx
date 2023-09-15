@@ -1,7 +1,6 @@
-import clsx from 'clsx';
+'use client';
 import Link from 'next/link';
 
-import Image from 'next/image';
 import { ReactNode } from 'react';
 import { IUICreateCustomizableDefine, UICreateCustomizable } from '../create';
 import { UIListViewType } from '@/types';
@@ -16,7 +15,6 @@ export type UIDocumentListItemType<Item extends Record<string, any>> =
       view: UIListViewType;
     },
     {
-      small: boolean;
       hideCategory: boolean;
       fields: {
         title: string;
@@ -28,6 +26,8 @@ export type UIDocumentListItemType<Item extends Record<string, any>> =
         publish_date: string;
       };
       itemAction?: (item: Item) => void;
+      showIcon: boolean;
+      showDownload: boolean;
       documentIcon: ReactNode;
     }
   >;
@@ -37,7 +37,6 @@ const UIDocumentListItem = <Item extends Record<string, any>>(
   return UICreateCustomizable<UIDocumentListItemType<Item>>({
     props,
     defaults: {
-      small: () => false,
       hideCategory: () => false,
       fields: ({ item }) => ({
         title: item.title,
@@ -48,6 +47,8 @@ const UIDocumentListItem = <Item extends Record<string, any>>(
         cover_image_url: item.image_cover?.url,
         publish_date: item.publish_date_format ?? item.publish_date,
       }),
+      showIcon: () => true,
+      showDownload: () => true,
       documentIcon: ({ render }) => {
         return (
           <DocumentIcon
@@ -79,7 +80,9 @@ const UIDocumentListItem = <Item extends Record<string, any>>(
       const fields = render('fields');
       return (
         <div className="flex justify-start items-start w-full p-4 gap-4 border border-gray-100 rounded-xl">
-          <div className="">{render('documentIcon')}</div>
+          {render('showIcon') && (
+            <div className="">{render('documentIcon')}</div>
+          )}
 
           <div className="text-left flex flex-col">
             {!render('hideCategory') && (
@@ -110,16 +113,18 @@ const UIDocumentListItem = <Item extends Record<string, any>>(
                 <BaseIcon icon="eye" fontSize="18px" />
                 Selengkapnya
               </button>
-              <Link
-                href={fields.file.url}
-                target="_blank"
-                title={fields.title}
-                download
-                className="font-default gap-2 normal-case btn text-white btn-sm btn-primary"
-              >
-                <BaseIcon icon="download" fontSize="18px" />
-                Unduh
-              </Link>
+              {render('showDownload') && (
+                <Link
+                  href={fields.file.url}
+                  target="_blank"
+                  title={fields.title}
+                  download
+                  className="font-default gap-2 normal-case btn text-white btn-sm btn-primary"
+                >
+                  <BaseIcon icon="download" fontSize="18px" />
+                  Unduh
+                </Link>
+              )}
             </div>
           </div>
         </div>
