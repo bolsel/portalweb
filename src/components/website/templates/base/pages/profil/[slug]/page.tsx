@@ -50,16 +50,10 @@ export default async function Page({
   return (
     <div className="p-3 md:p-4 lg:py-8 lg:px-10 w-full xl:grid xl:grid-cols-[268px,1fr] xl:grid-rows-[1fr,auto] lg:gap-6">
       <div className="mb-5 lg:mb-0">
-        <div className="dropdown w-full xl:block xl:dropdown-open z-10">
-          <label
-            tabIndex={0}
-            className="btn btn-sm btn-outline btn-primary drawer-button xl:hidden"
-          >
-            <BaseIcon icon="menu" />
-          </label>
+        <div className="w-full hidden xl:block">
           <ul
             tabIndex={0}
-            className="dropdown-content w-full menu bg-base-100  p-2 rounded-box shadow-md border-primary border-1 gap-1"
+            className="w-full menu bg-base-100  p-2 rounded-box shadow-md border-primary border-1 gap-1"
           >
             {menuList?.map((m, i) => {
               return (
