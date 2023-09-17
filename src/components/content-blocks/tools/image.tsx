@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { ContentBlocksItemProps } from '../_base';
 import clsx from 'clsx';
 import BlurImage from '@/components/blur-image';
+import imageZoom from 'fast-image-zoom';
 
 const ImageTool: FC<
   ContentBlocksItemProps<{
@@ -13,6 +14,15 @@ const ImageTool: FC<
   }>
 > = ({ data }) => {
   const { caption, withBackground = false, withBorder = false } = data;
+
+  useEffect(() => {
+    const destroy = imageZoom({
+      selector: '.image-zoom',
+      exceed: true,
+    });
+    return () => destroy();
+  }, []);
+
   return (
     <div
       className={clsx('w-full', {
@@ -22,10 +32,10 @@ const ImageTool: FC<
     >
       <BlurImage
         alt=""
-        width={0}
-        height={0}
+        width={data.file.width ?? 600}
+        height={data.file.height ?? 600}
         sizes="100vw"
-        className={clsx('rounded-md m-0 w-full', {
+        className={clsx('image-zoom rounded-md m-0 w-full h-auto', {
           '!mb-7': !caption,
         })}
         src={data.file.url}

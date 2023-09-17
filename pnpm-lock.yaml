@@ -20,6 +20,9 @@ dependencies:
   daisyui:
     specifier: ^3.7.3
     version: registry.npmjs.org/daisyui@3.7.3
+  fast-image-zoom:
+    specifier: ^7.0.1
+    version: registry.npmjs.org/fast-image-zoom@7.0.1
   framer-motion:
     specifier: ^10.16.4
     version: registry.npmjs.org/framer-motion@10.16.4(react-dom@18.2.0)(react@18.2.0)
@@ -1973,6 +1976,12 @@ packages:
       glob-parent: registry.npmjs.org/glob-parent@5.1.2
       merge2: registry.npmjs.org/merge2@1.4.1
       micromatch: registry.npmjs.org/micromatch@4.0.5
+
+  registry.npmjs.org/fast-image-zoom@7.0.1:
+    resolution: {integrity: sha512-lWLCm+dThkhoHVQr+u+cKWRhNKiOlxKTBTNiGVSOqTf1vqBLlZrcthMmflh6peipzm6w1ygbC/UgY+PLrDaQ9A==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fast-image-zoom/-/fast-image-zoom-7.0.1.tgz}
+    name: fast-image-zoom
+    version: 7.0.1
+    dev: false
 
   registry.npmjs.org/fast-json-stable-stringify@2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz}
