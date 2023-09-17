@@ -24,3 +24,6 @@ export type TNewsOrWebNewsItemBySlug = TNewsItemBySlug | TWebNewsItemBySlug;
 export type TDocumentItem =
   | TApiResourcePathReturn<'documents'>['read']['items'][0]
   | TApiResourcePathReturn<'organization_documents'>['read']['items'][0];
+
+export type TPublicServiceItem =
+  | TApiResourcePathReturn<'public_services'>['read']['items'][0];

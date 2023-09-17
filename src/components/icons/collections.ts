@@ -1,6 +1,6 @@
 const icons = {
 	"prefix": "base",
-	"lastModified": 1694690973,
+	"lastModified": 1694928775,
 	"icons": {
 		"apps": {
 			"body": "<path fill=\"currentColor\" d=\"M16 18H6a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2zM6 6v10h10V6zm20 6v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm0 12v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm-10 2v4h-4v-4h4m0-2h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2z\"/>",
@@ -282,6 +282,9 @@ const icons = {
 		},
 		"youtube": {
 			"body": "<g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><path d=\"M2.5 17a24.12 24.12 0 010-10 2 2 0 011.4-1.4 49.56 49.56 0 0116.2 0A2 2 0 0121.5 7a24.12 24.12 0 010 10 2 2 0 01-1.4 1.4 49.55 49.55 0 01-16.2 0A2 2 0 012.5 17\"/><path d=\"m10 15 5-3-5-3z\"/></g>"
+		},
+		"zoom-loupe": {
+			"body": "<path fill=\"currentColor\" d=\"M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 002 12a10 10 0 0010 10h8a2 2 0 002-2v-8A10 10 0 0012 2m1 5h-2v4H7v2h4v4h2v-4h4v-2h-4V7Z\"/>"
 		}
 	},
 	"width": 24,

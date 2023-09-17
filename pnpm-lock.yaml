@@ -23,15 +23,15 @@ dependencies:
   framer-motion:
     specifier: ^10.16.4
     version: registry.npmjs.org/framer-motion@10.16.4(react-dom@18.2.0)(react@18.2.0)
-  lightgallery:
-    specifier: ^2.7.1
-    version: registry.npmjs.org/lightgallery@2.7.1
   lodash:
     specifier: ^4.17.21
     version: registry.npmjs.org/lodash@4.17.21
   next:
     specifier: 13.4.19
     version: registry.npmjs.org/next@13.4.19(react-dom@18.2.0)(react@18.2.0)
+  photoswipe:
+    specifier: ^5.4.1
+    version: registry.npmjs.org/photoswipe@5.4.1
   qs:
     specifier: ^6.11.2
     version: registry.npmjs.org/qs@6.11.2
@@ -44,6 +44,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: registry.npmjs.org/react-dom@18.2.0(react@18.2.0)
+  react-photoswipe-gallery:
+    specifier: ^2.2.7
+    version: registry.npmjs.org/react-photoswipe-gallery@2.2.7(photoswipe@5.4.1)(prop-types@15.8.1)(react@18.2.0)
   react-share:
     specifier: ^4.4.1
     version: registry.npmjs.org/react-share@4.4.1(react@18.2.0)
@@ -2775,13 +2778,6 @@ packages:
       type-check: registry.npmjs.org/type-check@0.4.0
     dev: true
 
-  registry.npmjs.org/lightgallery@2.7.1:
-    resolution: {integrity: sha512-NbXOzD2APY1OhOOn464jDsBZBaCRahUoLvBxhDFxvwJeC8hCkCIPYSjGgGTYINxVK09DKMsNDJzRr1ngH5nDdg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/lightgallery/-/lightgallery-2.7.1.tgz}
-    name: lightgallery
-    version: 2.7.1
-    engines: {node: '>=6.0.0'}
-    dev: false
-
   registry.npmjs.org/lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/lilconfig/-/lilconfig-2.1.0.tgz}
     name: lilconfig
@@ -3302,6 +3298,13 @@ packages:
     version: 1.2.0
     dev: true
 
+  registry.npmjs.org/photoswipe@5.4.1:
+    resolution: {integrity: sha512-iauO0fP4oMdZvjlXzeIe8um1fZatkGE0bqdoIwpb65jlo/KK1KhfD7Z51+0YhS2tC4FOoOtE1p0c4o/HbY1s2Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/photoswipe/-/photoswipe-5.4.1.tgz}
+    name: photoswipe
+    version: 5.4.1
+    engines: {node: '>= 0.12.0'}
+    dev: false
+
   registry.npmjs.org/picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/picocolors/-/picocolors-1.0.0.tgz}
     name: picocolors
@@ -3477,7 +3480,6 @@ packages:
       loose-envify: registry.npmjs.org/loose-envify@1.4.0
       object-assign: registry.npmjs.org/object-assign@4.1.1
       react-is: registry.npmjs.org/react-is@16.13.1
-    dev: true
 
   registry.npmjs.org/pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/pump/-/pump-3.0.0.tgz}
@@ -3557,7 +3559,21 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz}
     name: react-is
     version: 16.13.1
-    dev: true
+
+  registry.npmjs.org/react-photoswipe-gallery@2.2.7(photoswipe@5.4.1)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-AEYNoL4/IIRosIUonn4haaFQNn1ui4vdVgAY9LHd/imVamNCkqUcyWeT6317UILp/yJI2gohsd3lWmcJEbjCag==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-photoswipe-gallery/-/react-photoswipe-gallery-2.2.7.tgz}
+    id: registry.npmjs.org/react-photoswipe-gallery/2.2.7
+    name: react-photoswipe-gallery
+    version: 2.2.7
+    peerDependencies:
+      photoswipe: '>= 5.2.2'
+      prop-types: '>= 15.7.0'
+      react: '>= 16.8.0'
+    dependencies:
+      photoswipe: registry.npmjs.org/photoswipe@5.4.1
+      prop-types: registry.npmjs.org/prop-types@15.8.1
+      react: registry.npmjs.org/react@18.2.0
+    dev: false
 
   registry.npmjs.org/react-share@4.4.1(react@18.2.0):
     resolution: {integrity: sha512-AJ9m9RiJssqvYg7MoJUc9J0D7b/liWrsfQ99ndKc5vJ4oVHHd4Fy87jBlKEQPibT40oYA3AQ/a9/oQY6/yaigw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-share/-/react-share-4.4.1.tgz}
