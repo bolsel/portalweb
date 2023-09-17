@@ -61,3 +61,17 @@ const mergePaths = (a: string, b: string) => {
   if (!b.startsWith(PATH_SEPARATOR)) b = PATH_SEPARATOR + b;
   return a + b;
 };
+
+export function nextImageUrl({
+  url,
+  width,
+  quality,
+}: {
+  url: string;
+  width: 100 | 240 | 320 | 640 | 750 | 828 | 1080 | 1200 | 1920 | 2048 | 3840;
+  quality: number;
+}) {
+  return `${urlToPortal('/_next/image')}?url=${encodeURIComponent(
+    url
+  )}&w=${width}&q=${quality}`;
+}
