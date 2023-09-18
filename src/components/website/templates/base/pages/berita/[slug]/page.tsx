@@ -22,7 +22,7 @@ export default function Page({
                 width="0"
                 height="0"
                 sizes="100vw"
-                className="w-full h-full rounded-lg"
+                className="image-zoom w-full h-full rounded-lg"
               />
               <div className="flex flex-col gap-1 text-gray-700">
                 <div className="flex items-center gap-4">
