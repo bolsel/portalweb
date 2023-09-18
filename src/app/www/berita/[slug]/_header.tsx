@@ -3,6 +3,7 @@ import BaseIcon from '@/components/icons/base-icon';
 import { TApiResourcePathReturn } from '@/types';
 import Image from 'next/image';
 import ShareButton from './_share-button';
+import ShowCover from './_show-cover';
 
 export default function Header({
   item,
@@ -100,7 +101,10 @@ export default function Header({
                 </div>
               </div>
             </div>
-            <ShareButton item={item} />
+            <div className="flex gap-2">
+              <ShowCover item={item} />
+              <ShareButton item={item} />
+            </div>
           </div>
         </div>
       </div>
