@@ -39,7 +39,7 @@ export default async function Page() {
       </section>
 
       <section className="py-6 md:py-8 xl:py-12">
-        <div className="container bg-gray-200 mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6 rounded-lg">
+        <div className="container bg-gray-100 mx-auto 2xl:px-0 xl:max-w-7xl px-0 max-w-full xl:px-6 rounded-lg">
           <GrafikInfoList />
         </div>
       </section>

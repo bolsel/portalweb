@@ -114,7 +114,7 @@ group-hover:text-primary-700 group-hover:bg-primary-200"
                       <Link
                         href={item.link}
                         target="_blank"
-                        className="inline-flex bg-primary lg:bg-primary/80 lg:group-hover:bg-primary text-sm text-white rounded-lg px-3 py-1 items-center gap-4"
+                        className="inline-flex text-sm group-hover:bg-primary group-hover:text-white rounded-lg px-3 py-1 items-center gap-4 transition-colors ease-brand duration-250"
                       >
                         Buka Aplikasi <BaseIcon icon="external-link" />
                       </Link>

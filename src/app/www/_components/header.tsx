@@ -43,7 +43,7 @@ export default function Header() {
           <Link
             href="/"
             className="mr-auto w-auto h-8 lg:h-[38px] flex gap-3 items-center"
-            aria-label="Beranda"
+            aria-label="bolselkab.go.id"
           >
             <Image
               className="w-auto h-full"
