@@ -10,6 +10,8 @@ import Lists from './_components/lists';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
+export const revalidate = 86400;
+
 export async function generateMetadata({
   params: { slug },
 }): Promise<Metadata> {
