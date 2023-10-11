@@ -25,6 +25,10 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: '/www/berita', destination: '/www/berita/kategori/terbaru' },
+      {
+        source: '/portal/og-image/:path*',
+        destination: '/_next/image?url=/og-image-source/:path*&w=3840&q=100',
+      },
     ];
   },
 };

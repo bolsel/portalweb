@@ -20,7 +20,7 @@ export default async function middleware(req: NextRequest) {
 
   if (
     path.match(
-      '/((og-image/|_next/|images|_static/|_vercel|[\\w-]+\\.\\w+).*)'
+      '/((og-image-source/|_next/|images|_static/|_vercel|[\\w-]+\\.\\w+).*)'
     ) &&
     !path.match('sitemap.xml')
   ) {

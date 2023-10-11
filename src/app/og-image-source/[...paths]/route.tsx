@@ -4,6 +4,7 @@ import { apiResourceItemPathRead, apiResourceItemRead } from '@/lib/server';
 import { dataSiteBySubdomain } from '@/lib/data/site';
 
 export const runtime = 'edge';
+export const revalidate = 'force-cache';
 
 export async function GET(
   req: NextRequest,
