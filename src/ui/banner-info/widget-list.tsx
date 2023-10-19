@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RequireOnlyOne, TApiResourcePathReturn } from '@/types';
 import BaseIcon from '@/components/icons/base-icon';
 import { IUICreateCustomizableDefine, UICreateCustomizable } from '../create';
+import useOnScreen from '@/lib/hooks/use-on-screen';
 
 type Props = {
   items?: TApiResourcePathReturn<'banner_info'>['read']['items'];
@@ -24,11 +25,23 @@ const UIBannerInfoWidgetList: UIBannerInfoWidgetListType['returnType'] = (
     props,
     defaults: {},
     Component({ swiper, items, skeleton }) {
+      const containerRef = useRef<HTMLDivElement>(null);
       const swiperRef = useRef<SwiperRef>(null);
+      const isVisible = useOnScreen(containerRef)
 
+      useEffect(() => {
+        if (isVisible) {
+          if (swiperRef.current) {
+            swiperRef.current.swiper.autoplay.start()
+          }
+        }else{
+          if (swiperRef.current) swiperRef.current.swiper.autoplay.stop();
+        }
+      }, [isVisible]);
       return (
         <div
           className="w-full h-full"
+          ref={containerRef}
           onMouseOver={() => {
             if (swiperRef.current) swiperRef.current.swiper.autoplay.pause();
           }}

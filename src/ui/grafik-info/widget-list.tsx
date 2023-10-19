@@ -8,7 +8,7 @@ import {
   Autoplay,
   EffectCoverflow,
 } from 'swiper/modules';
-import { ComponentPropsWithoutRef, useRef } from 'react';
+import { ComponentPropsWithoutRef, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { RequireOnlyOne, TApiResourcePathReturn } from '@/types';
 import { IUICreateCustomizableDefine, UICreateCustomizable } from '../create';
@@ -17,6 +17,7 @@ import BaseIcon from '@/components/icons/base-icon';
 import { useModal } from '@/components/modal/provider';
 import { urlToWww } from '@/init';
 import Link from 'next/link';
+import useOnScreen from '@/lib/hooks/use-on-screen';
 
 type _Item = TApiResourcePathReturn<'grafik_info'>['read']['items'][0];
 type Props = {
@@ -39,7 +40,10 @@ const UIGrafikInfoWidgetList: UIGrafikInfoWidgetListType['returnType'] = (
       showAllButton: () => true,
     },
     Component({ swiper, slideContainer, items, render, skeleton }) {
+      const containerRef = useRef<HTMLDivElement>(null);
       const swiperRef = useRef<SwiperRef>(null);
+      const isVisible = useOnScreen(containerRef)
+      
       const modal = useModal();
       const showModal = (item: _Item) => {
         modal?.show(
@@ -87,9 +91,18 @@ const UIGrafikInfoWidgetList: UIGrafikInfoWidgetListType['returnType'] = (
           swiper?.className ?? ''
         ),
       };
-
+      useEffect(() => {
+        if (isVisible) {
+          if (swiperRef.current) {
+            swiperRef.current.swiper.autoplay.start()
+          }
+        }else{
+          if (swiperRef.current) swiperRef.current.swiper.autoplay.stop();
+        }
+      }, [isVisible]);
       return (
         <div
+          ref={containerRef}
           className="w-full h-full"
           onMouseOver={() => {
             if (swiperRef.current) swiperRef.current.swiper.autoplay.pause();
