@@ -87,11 +87,6 @@ export async function dataSiteMenu(site: TWebsiteItemBySubdomain) {
       items: dataSiteMenuProfilItems(site),
     },
     {
-      title: 'Dokumen',
-      link: '/dokumen',
-      items: dataSiteMenuDokumenItems(site),
-    },
-    {
       title: 'Berita',
       link: '/berita',
       items: [
@@ -108,6 +103,11 @@ export async function dataSiteMenu(site: TWebsiteItemBySubdomain) {
           icon: 'newspaper',
         },
       ],
+    },
+    {
+      title: 'Dokumen',
+      link: '/dokumen',
+      items: dataSiteMenuDokumenItems(site),
     },
   ];
   if (modules.indexOf('aduan_publik') >= 0) {
