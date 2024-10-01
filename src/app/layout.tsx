@@ -18,6 +18,7 @@ export default function RootLayout({
     <html lang="id" data-theme={subdomain}>
       <head>
         <link rel="icon" href={urlToPortal('/favicon.ico')} sizes="any" />
+        <meta name="theme-color" content="#c6312a" />
       </head>
       <body className={clsx(variableClass)}>
         {!IS_DEV && (
