@@ -112,7 +112,7 @@ export default function Header() {
                 src={'/logo.png'}
                 className={'h-8 w-7'}
               />
-              <div className="leading-6 group-hover:text-primary flex flex-col">
+              <div className="leading-3 group-hover:text-primary flex flex-col">
                 <div className="font-intro">{site.organization.name}</div>
               </div>
             </Link>

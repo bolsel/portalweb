@@ -21,14 +21,14 @@ export default function Jumbotron({
       />
       <div className="jumbotron-overlay" />
       <div className="ui-container relative pt-24 pb-40 z-10">
-        <h1 className="font-intro font-bold text-3xl leading-relaxed text-primary-500 mb-2">
+        <h1 className="font-intro font-bold text-2xl lg:text-3xl text-primary-500 mb-2">
           {page.title}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-4">
           {page.subTitle && (
             <h2
               className={clsx(
-                'font-intro text-sm leading-6 text-white line-clamp-4 sm:col-span-2'
+                'font-intro text-sm leading-4 text-white line-clamp-4 sm:col-span-2'
               )}
             >
               {page.subTitle}
