@@ -17,16 +17,6 @@ export default async function middleware(req: NextRequest) {
     ?.replace(`.${LOCALDEV_DOMAIN}`, '')
     ?.replace(`.${ROOT_DOMAIN}`, '');
   const path = url.pathname;
-  // debug
-  console.log(
-    hostname,
-    '::',
-    subdomain,
-    '::',
-    ROOT_DOMAIN,
-    '::',
-    DOMAIN_PORTAL
-  );
 
   if (
     path.match(
