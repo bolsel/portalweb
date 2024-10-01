@@ -6,6 +6,7 @@ import DocumentIcon from '@/components/icons/document-icon';
 import BaseIcon from '@/components/icons/base-icon';
 import { documentMimeTypeLabel, humanFileSize } from '@/lib/utils';
 import ShareItem from '@/components/share/item';
+import DokumenShareItem from '@/components/share/item-dokumen';
 
 export type UIDocumentItemDetailType<Item extends Record<string, any>> =
   IUICreateCustomizableDefine<
@@ -182,11 +183,12 @@ hover:text-primary-700 hover:bg-primary-100"
               <h2 className="font-default text-xs text-blue-gray-400 mb-1 leading-5">
                 Bagikan Dokumen
               </h2>
-              <ShareItem
+              <DokumenShareItem item={item as any} />
+              {/* <ShareItem
                 url={`https://www.bolselkab.go.id/dokumen/${item.slug}`}
                 title={item.title}
                 quote={item.description}
-              />
+              /> */}
             </div>
           </section>
 
