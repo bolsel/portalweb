@@ -21,7 +21,7 @@ export default async function Layout({
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer site={site} />
     </>
   );
 }

@@ -1,11 +1,16 @@
 import { apiResourceItemPathRead } from '@/lib/server';
-import { useSiteContext } from '../../provider';
+import { SiteContextType, useSiteContext } from '../../provider';
 import BaseIcon, { BaseIconNamesType } from '@/components/icons/base-icon';
 
-export default async function Footer() {
+export default async function Footer({
+  site,
+}: {
+  site: SiteContextType['site'];
+}) {
   const orgInfo = await apiResourceItemPathRead('organizations').infoBySlug({
-    paths: ['diskominfo'],
+    paths: [site.organization.slug],
   });
+
   return (
     <footer>
       <div className="bg-primary px-5 py-8">
