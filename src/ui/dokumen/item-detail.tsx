@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { IUICreateCustomizableDefine, UICreateCustomizable } from '../create';
 import DocumentIcon from '@/components/icons/document-icon';
 import BaseIcon from '@/components/icons/base-icon';
-import { documentMimeTypeLabel } from '@/lib/utils';
+import { documentMimeTypeLabel, humanFileSize } from '@/lib/utils';
 import ShareItem from '@/components/share/item';
 
 export type UIDocumentItemDetailType<Item extends Record<string, any>> =
@@ -117,6 +117,22 @@ const UIDocumentItemDetail = <Item extends Record<string, any>>(
 hover:text-primary-700 hover:bg-primary-100"
               >
                 {documentMimeTypeLabel(fields.file.type)}
+              </p>
+            </div>
+          </section>
+          <section className="flex gap-4">
+            <div className="w-6">
+              <BaseIcon
+                icon="document-file"
+                className="self-start text-primary w-6 h-6"
+              />
+            </div>
+            <div>
+              <h2 className="font-default text-xs text-blue-gray-400 mb-1 leading-5">
+                Ukuran Dokumen
+              </h2>
+              <p className="text-gray-800 font-normal text-sm leading-relaxed mb-4">
+                {humanFileSize(fields.file.filesize, true, 0)}
               </p>
             </div>
           </section>
