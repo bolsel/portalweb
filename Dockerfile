@@ -1,5 +1,5 @@
 
-FROM node:18-alpine AS prodlib
+FROM node:18.12.1-alpine AS prodlib
 WORKDIR /app
 
 COPY package.json .
@@ -8,7 +8,7 @@ RUN corepack enable && corepack prepare
 COPY pnpm-lock.yaml .
 RUN pnpm install --prod
 
-FROM node:18-alpine AS builder
+FROM node:18.12.1-alpine AS builder
 WORKDIR /app
 
 COPY package.json .
@@ -20,7 +20,7 @@ RUN pnpm install
 COPY . .
 RUN pnpm build
 
-FROM node:18-alpine AS runtime
+FROM node:18.12.1-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --chown=node:node --from=prodlib /app/node_modules ./node_modules
