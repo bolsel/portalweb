@@ -2,7 +2,7 @@ import { createDirectus, staticToken, rest } from '@directus/sdk';
 import { ApiItemsSchema } from '@/types';
 
 export const apiInstance = createDirectus<ApiItemsSchema>(
-  process.env.BACKEND_URL!,
+  process.env.BACKEND_URL!
 ).with(staticToken(process.env.BACKEND_TOKEN!));
 
 export type ApiClientOptions = RequestInit;
@@ -13,6 +13,6 @@ export const apiClient = (options?: ApiClientOptions) => {
         if (options) return { ...o, ...options };
         return o;
       },
-    }),
+    })
   );
 };
