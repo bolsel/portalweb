@@ -202,7 +202,7 @@ export default function Footer() {
         <div className="ui-container">
           <div className="flex flex-col items-center lg:items-start gap-5">
             <p className="font-lato text-xs lg:text-sm font-normal leading-6 text-white text-center lg:text-left">
-              Copyright © 2023 <br className="lg:hidden" /> Pemerintah Kabupaten
+              Copyright © 2024 <br className="lg:hidden" /> Pemerintah Kabupaten
               Bolaang Mongondow Selatan
             </p>
           </div>

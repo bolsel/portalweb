@@ -96,7 +96,7 @@ export default function HeaderMobile() {
             </section>
             <section className="mt-auto pt-4 border-t border-primary-500">
               <p className="font-lato text-sm font-normal leading-6 text-white text-center">
-                Copyright © 2023 <br /> Pemerintah Kabupaten Bolaang Mongondow
+                Copyright © 2024 <br /> Pemerintah Kabupaten Bolaang Mongondow
                 Selatan
               </p>
             </section>

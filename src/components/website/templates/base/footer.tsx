@@ -94,7 +94,7 @@ export default async function Footer({
       </div>
       <div className="bg-primary-dark p-3 text-white">
         <div className="flex flex-col items-center justify-center">
-          <div>&copy; 2023 {orgInfo.name}</div>
+          <div>&copy; 2024 {orgInfo.name}</div>
           <div className="text-xs">
             PEMERINTAH KABUPATEN BOLAANG MONGONDOW SELATAN
           </div>
