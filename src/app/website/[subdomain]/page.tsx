@@ -11,7 +11,7 @@ export default function Page(props: TWebsitePageProps) {
         ...props,
         name: 'home',
         title: '{{site.name}}',
-        subTitle: 'Pemerintah Kabupaten Bolaang Mongondow Selatan',
+        subTitle: 'Pemkab Bolaang Mongondow Selatan',
       }}
     />
   );
