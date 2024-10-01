@@ -6,7 +6,7 @@ COPY package.json .
 RUN corepack enable && corepack prepare
 
 COPY pnpm-lock.yaml .
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm install --prod
 
 FROM node:18.18.0-alpine AS builder
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY package.json .
 RUN corepack enable && corepack prepare
 
 COPY pnpm-lock.yaml .
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 COPY . .
 RUN pnpm build
