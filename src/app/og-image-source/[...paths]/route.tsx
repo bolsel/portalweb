@@ -1,7 +1,12 @@
 import { NextRequest } from 'next/server';
 import BaseOgImage, { BaseOgImagePropsType } from '../base-og-image';
-import { apiResourceItemPathRead, apiResourceItemRead } from '@/lib/server';
+import {
+  apiResourceItemPathRead,
+  apiResourceItemRead,
+  humanFileSize,
+} from '@/lib/server';
 import { dataSiteBySubdomain } from '@/lib/data/site';
+import { urlToPortalProd } from '@/init';
 
 export const runtime = 'edge';
 export const revalidate = 'force-cache';
@@ -25,6 +30,7 @@ export async function GET(
       options.description = site.name;
     }
   }
+
   if (type === 'berita') {
     options.title = 'Berita';
     if (slug) {
@@ -71,6 +77,52 @@ export async function GET(
         options.title = `${item.title} (Layanan Publik)`;
         options.description = item.description;
         options.images = item.images ? item.images.map((img) => img.url) : [];
+      }
+    }
+  } else if (type === 'dokumen') {
+    options.title = 'Dokumen';
+    if (slug) {
+      const item = await (isWww
+        ? apiResourceItemRead('documents')
+            .setQuery({
+              filter: {
+                slug: {
+                  _eq: slug,
+                },
+              },
+            })
+            .items({
+              single: true,
+            })
+        : apiResourceItemRead('organization_documents')
+            .setQuery({
+              filter: {
+                slug: {
+                  _eq: slug,
+                },
+              },
+            })
+            .items({
+              single: true,
+            })
+      ).catch(() => null);
+
+      if (item) {
+        options.title = item.title;
+        options.description = `Ukuran: ${humanFileSize(
+          item.file.filesize,
+          true,
+          0
+        )}, Jenis: ${item.file.type}`;
+        options.customImage = (
+          <div tw="flex w-full items-center justify-center flex-1 rounded-lg">
+            <img
+              tw={`h-full w-50% rounded-xl shadow-sm`}
+              style={{ objectFit: 'cover' }}
+              src={urlToPortalProd('/images/dokumen-file-icon.webp')}
+            />
+          </div>
+        );
       }
     }
   }

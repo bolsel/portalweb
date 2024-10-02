@@ -3,6 +3,7 @@
 import { DOMAIN_WWW, urlToPortalProd } from '@/init';
 import { TWebsiteItemBySubdomain } from '@/types';
 import { ImageResponse, NextRequest } from 'next/server';
+import { ReactNode } from 'react';
 
 const truncate = (str: string, num: number) => {
   if (!str) return '';
@@ -16,6 +17,7 @@ export type BaseOgImagePropsType = {
   title: string;
   description: string;
   images: string[];
+  customImage?: ReactNode;
   req: NextRequest;
   site?: TWebsiteItemBySubdomain;
 };
@@ -23,6 +25,7 @@ export default async function BaseOgImage({
   title,
   description,
   images,
+  customImage,
   req,
   site,
 }: BaseOgImagePropsType) {
@@ -57,6 +60,7 @@ export default async function BaseOgImage({
               <h3 tw="text-xl text-gray-600 leading-none tracking-tight">
                 {truncate(description, 120)}
               </h3>
+              {customImage}
               {images.length ? (
                 <div tw="flex w-full flex-1 rounded-lg">
                   <img
