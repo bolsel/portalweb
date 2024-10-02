@@ -1,4 +1,5 @@
 import SitePage from '@/components/website/page';
+import { urlToPortal } from '@/init';
 import { dataSiteBySubdomain } from '@/lib/data/site';
 import { apiResourceItemRead } from '@/lib/server';
 import { TWebsitePageProps } from '@/types';
@@ -33,6 +34,12 @@ export async function generateMetadata({
   return {
     title: `${item.title} | ${site.name}`,
     description: `(${kategoryText(item.category)}) ${site.organization.name}`,
+    openGraph: {
+      images: [
+        urlToPortal(`/og-image/${site.subdomain}/dokumen/${item.slug}`),
+        urlToPortal('/images/dokumen-file-icon.webp'),
+      ],
+    },
   };
 }
 

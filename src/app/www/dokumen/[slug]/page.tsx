@@ -5,7 +5,7 @@ import UIDocumentItemDetail from '@/ui/dokumen/item-detail';
 import PageWithJumbotron from '@/components/pages/with-jumbotron';
 import UIDocumentItemFrame from '@/ui/dokumen/item-frame';
 import JsonLdRender from '@/components/jsonld-render';
-import { urlToWww } from '@/init';
+import { urlToPortal, urlToWww } from '@/init';
 
 type Props = {
   params: { slug: string };
@@ -36,6 +36,12 @@ export async function generateMetadata(
   return {
     title: item.title,
     description: item.description,
+    openGraph: {
+      images: [
+        urlToPortal(`/og-image/www/dokumen/${item.slug}`),
+        urlToPortal('/images/dokumen-file-icon.webp'),
+      ],
+    },
   };
 }
 
