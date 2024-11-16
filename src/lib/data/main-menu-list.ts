@@ -86,6 +86,31 @@ export default async function dataMainMenuList() {
         ],
       ],
     },
+    {
+      title: 'Smart Bolsel',
+      items: [
+        {
+          title: 'Mendaftar',
+          link: `/smart/register`,
+          description: 'Buat akun SmartBolsel',
+          icon: 'app',
+        },
+        {
+          title: 'Bolsel Mail',
+          link: 'https://mail.bolselkab.go.id',
+          description:
+            'Layanan Email yang dapat diakses seluruh ASN Pemkab Bolsel',
+          icon: 'app',
+        },
+        {
+          title: 'Cloud Bolsel',
+          link: 'https://cloud.bolselkab.go.id',
+          description:
+            'Layanan Penyimpanan Cloud dan Layanan Kolaborasi SmartBolsel.',
+          icon: 'app',
+        },
+      ],
+    },
   ];
   return mainMenu;
 }
