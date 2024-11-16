@@ -17,7 +17,6 @@ jobs:
 
       - name: 'Create .env.local'
         run: |
-          echo NEXT_PUBLIC_ROOT_DOMAIN=portal-staging.bolselkab.go.id >> .env.local
           echo BACKEND_URL=${{ secrets.BACKEND_URL }} >> .env.local
           echo BACKEND_TOKEN=${{ secrets.BACKEND_TOKEN }} >> .env.local
           echo NEW_RELIC_APP_NAME=${{ secrets.NEW_RELIC_APP_NAME }} >> .env.local
