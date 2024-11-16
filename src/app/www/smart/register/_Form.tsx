@@ -2,18 +2,16 @@
 import clsx from 'clsx';
 import _ from 'lodash';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { TDFormConfig, TDFormField, validate } from './base';
+import { TDFormField, TDFormFields, validate } from './base';
 
 function RenderField({
   field,
-  config,
   deps,
   onChange,
   error,
   value,
 }: {
   field: TDFormField;
-  config: TDFormConfig;
   deps: Record<string, any>;
   onChange: (e: ChangeEvent<any>) => void;
   error?: string;
@@ -93,21 +91,21 @@ function RenderField({
 
 export function DForm({
   deps,
-  config,
+  fields,
 }: {
-  config: TDFormConfig;
+  fields: TDFormFields;
   deps: Record<string, any>;
 }) {
   const [isSend, setIsSend] = useState(false);
   const [errorMsg, setErrMsg] = useState('');
   const [sendSuccess, setSendSuccess] = useState(false);
-  const defaultFormData = _.mapValues(_.keyBy(config.fields, 'id'), () => '');
+  const defaultFormData = _.mapValues(_.keyBy(fields, 'id'), () => '');
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState({});
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { hasError, errors } = validate(formData);
+    const { hasError, errors } = validate(formData, fields);
     setErrors(errors);
     setSendSuccess(false);
     setErrMsg('');
@@ -150,7 +148,6 @@ export function DForm({
     return (
       <RenderField
         field={field}
-        config={config}
         deps={deps}
         value={formData[field.id]}
         onChange={onFieldChange}
@@ -161,7 +158,7 @@ export function DForm({
   return (
     <>
       <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
-        {config.fields.map((field, index) => {
+        {fields.map((field, index) => {
           return <div key={index}>{normalizerField(field)}</div>;
         })}
         <div className="mt-4">

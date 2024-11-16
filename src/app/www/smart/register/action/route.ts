@@ -3,9 +3,14 @@ import { validate } from '../base';
 import { apiClient } from '@/lib/server';
 import { triggerFlow } from '@directus/sdk';
 
+export const fetchCache = 'force-no-store';
+
 export async function POST(req: NextRequest) {
+  const formFields = (await apiClient({}).request(
+    triggerFlow('GET', 'bf76d6dc-e435-4a89-b0bf-d76f6e7c4110')
+  )) as any;
   const body = await req.json();
-  const { errors, hasError } = validate(body);
+  const { errors, hasError } = validate(body, formFields);
   if (hasError) {
     return NextResponse.json({ errors });
   }

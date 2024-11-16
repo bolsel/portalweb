@@ -4,7 +4,6 @@ import PageWithJumbotron from '@/components/pages/with-jumbotron';
 import { DForm } from './_Form';
 import { triggerFlow } from '@directus/sdk';
 import _ from 'lodash';
-import { formConfig } from './base';
 
 export const fetchCache = 'force-no-store';
 
@@ -19,6 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RegisterSmartBolsel() {
+  const formFields = (await apiClient({}).request(
+    triggerFlow('GET', 'bf76d6dc-e435-4a89-b0bf-d76f6e7c4110')
+  )) as any;
+
   const smartDataDeps = (await apiClient({}).request(
     triggerFlow('GET', '78507413-cdbb-4dd2-9467-1f1c201cc8e4')
   )) as any;
@@ -35,7 +38,6 @@ export default async function RegisterSmartBolsel() {
     (v) => `${v.code} - ${v.name}`
   );
 
-  let formSendStatus = false;
   return (
     <PageWithJumbotron
       jumbotron={{
@@ -57,7 +59,7 @@ export default async function RegisterSmartBolsel() {
       <div className="w-full grid grid-cols-1 lg:grid-cols-[60%,40%]">
         <section className="lg:px-10 order-last lg:order-first">
           <DForm
-            config={formConfig}
+            fields={formFields}
             deps={{
               ...smartDataDeps,
               organizationsSelect,
