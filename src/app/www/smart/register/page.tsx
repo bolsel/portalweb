@@ -5,6 +5,9 @@ import { DForm } from './_Form';
 import { triggerFlow } from '@directus/sdk';
 import _ from 'lodash';
 import { formConfig } from './base';
+
+export const fetchCache = 'force-no-store';
+
 const pageTitle = 'Mendaftar Akun SmartBolsel';
 const pageDescription =
   'Mendaftar akun untuk satu akses layanan publik pemerintahan Kabupaten Bolaang Mongondow Selatan';
