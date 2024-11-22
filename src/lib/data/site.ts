@@ -2,6 +2,7 @@ import { BaseIconNamesType } from '@/components/icons/base-icon';
 import { apiResourceItemPathRead } from '../server';
 import { TWebsiteItemBySubdomain, TWebsiteMenu } from '@/types';
 import { urlToWww } from '@/init';
+import _ from 'lodash';
 
 export async function dataSiteBySubdomain(subdomain: string) {
   return await apiResourceItemPathRead('websites')
@@ -14,6 +15,12 @@ export async function dataSiteBySubdomain(subdomain: string) {
 export async function dataSiteBeritaBySlug(slug: string) {
   return await apiResourceItemPathRead('web_news')
     .bySlug({ paths: [slug] })
+    .catch(() => null);
+}
+
+export async function dataSitePageBySlug(websiteId: string, slug: string) {
+  return await apiResourceItemPathRead('web_pages')
+    .bySlug({ paths: [websiteId, slug] })
     .catch(() => null);
 }
 
@@ -110,6 +117,26 @@ export async function dataSiteMenu(site: TWebsiteItemBySubdomain) {
       items: dataSiteMenuDokumenItems(site),
     },
   ];
+  const menusData = await apiResourceItemPathRead('web_menu')
+    .siteMenu({ paths: [site.id] })
+    .catch((e) => null);
+
+  if (menusData) {
+    _.forEach(menusData, (menu) => {
+      menuItems.push({
+        title: menu.title,
+        link: `/menu/${menu.slug}`,
+        items: _.map(_.sortBy(menu.pages, 'sort'), (page) => {
+          return {
+            title: page.title,
+            link: `/page/${page.slug}`,
+            description: page.description ?? '',
+            icon: 'newspaper',
+          };
+        }),
+      });
+    });
+  }
   if (modules.indexOf('aduan_publik') >= 0) {
     menuItems.push({
       title: 'Aduan Publik',

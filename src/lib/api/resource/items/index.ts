@@ -11,5 +11,7 @@ export { default as organization_pejabat } from './organization_pejabat';
 export { default as organizations } from './organizations';
 export { default as public_services } from './public_services';
 export { default as web_aduan_publik } from './web_aduan_publik';
+export { default as web_menu } from './web_menu';
 export { default as web_news } from './web_news';
+export { default as web_pages } from './web_pages';
 export { default as websites } from './websites';

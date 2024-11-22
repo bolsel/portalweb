@@ -8,5 +8,6 @@ const pages = {
   dokumen: dynamic(() => import('./dokumen/page')),
   'dokumen/[slug]': dynamic(() => import('./dokumen/[slug]/page')),
   'profil/[slug]': dynamic(() => import('./profil/[slug]/page')),
+  'page/[slug]': dynamic(() => import('./page/[slug]/page')),
 };
 export default pages;

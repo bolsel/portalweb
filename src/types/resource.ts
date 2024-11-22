@@ -18,6 +18,8 @@ export type TApiResourcePathReturn<
 export type TNewsItemBySlug = TApiResourcePathReturn<'news'>['read']['bySlug'];
 export type TWebNewsItemBySlug =
   TApiResourcePathReturn<'web_news'>['read']['bySlug'];
+export type TWebPageItemBySlug =
+  TApiResourcePathReturn<'web_pages'>['read']['bySlug'];
 
 export type TNewsOrWebNewsItemBySlug = TNewsItemBySlug | TWebNewsItemBySlug;
 

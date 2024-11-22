@@ -7,14 +7,16 @@ import { useEffect, useState } from 'react';
 
 export default function NewsShareItem({
   item,
+  isPage,
   ...props
 }: Partial<ShareItemProps> & {
   item: TNewsOrWebNewsItemBySlug;
+  isPage?: true;
 }) {
   const [url, setUrl] = useState('');
   useEffect(() => {
-    setUrl(`${window.origin}/berita/${item.slug}`);
-  }, [item]);
+    setUrl(`${window.origin}/${isPage ? 'page' : 'berita'}/${item.slug}`);
+  }, [item, isPage]);
   return (
     <ShareItem
       url={url}

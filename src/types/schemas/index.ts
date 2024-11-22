@@ -20,6 +20,8 @@ import { PublicServices, PublicServicesMedia } from './public_services';
 import { WebAduanPublik } from './web_aduan_publik';
 import { WebNews } from './web_news';
 import { Websites } from './websites';
+import { WebPages } from './web_pages';
+import { WebMenu } from './web_menu';
 
 export * from './_base';
 
@@ -41,7 +43,9 @@ export type ApiItemsSchema = CompleteSchema<{
   public_services_media: PublicServicesMedia[];
   public_services: PublicServices[];
   web_aduan_publik: WebAduanPublik[];
+  web_menu: WebMenu[];
   web_news: WebNews[];
+  web_pages: WebPages[];
   websites: Websites[];
   directus_users: MergeCoreCollection<
     CoreSchema,
